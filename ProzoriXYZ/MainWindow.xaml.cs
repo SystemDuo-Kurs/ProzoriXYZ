@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,22 +21,42 @@ namespace ProzoriXYZ
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ObservableCollection<Osoba> osobe = new();
+        private bool dodavanje = true;
+        
         public MainWindow()
         {
             InitializeComponent();
-            Osoba o = new();
-            DataContext = o;
+ 
+            DataContext = new Osoba();
 
-            List<Osoba> osobe = new();
-            osobe.Add(new Osoba { Ime = "Pera", Prezime = "Peric" });
-            osobe.Add(new Osoba { Ime = "Neko", Prezime = "Nekic" });
-            osobe.Add(new Osoba { Ime = "Asd", Prezime = "Zklj" });
             dg.ItemsSource = osobe;
-
-            string neki = "asd";
-            string asd = null;
-            int br = 45;
-            int? brrr = null;
         }
-    }
+
+		private void DodajOsobu(object sender, RoutedEventArgs e)
+		{
+            if (dodavanje)
+                osobe.Add(DataContext as Osoba);
+            else
+			{
+                dodavanje = true;
+                dugmence.Content = "Dodaj";
+			}
+            DataContext = new Osoba();
+		}
+
+		private void dg_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+            if (e.AddedItems.Count > 0)
+            {
+                dodavanje = false;
+                dugmence.Content = "OK";
+                DataContext = e.AddedItems[0];
+            } else
+			{
+                dodavanje = true;
+                dugmence.Content = "Dodaj";
+			}
+		}
+	}
 }

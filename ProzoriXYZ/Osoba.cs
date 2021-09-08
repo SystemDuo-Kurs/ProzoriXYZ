@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProzoriXYZ
 {
-    class Osoba
+    public class Osoba
     {
         public string Ime { get; set; }
         public string Prezime { get; set; }

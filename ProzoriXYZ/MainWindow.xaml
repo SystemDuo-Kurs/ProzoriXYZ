@@ -9,18 +9,23 @@
     <StackPanel>
         <UniformGrid  Columns="2">
             <Label >Ime:</Label>
-            <TextBox Text="{Binding Path=Ime, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Text="{Binding Path=Ime}"/>
             <Label >Prezime:</Label>
-            <TextBox  Text="{Binding Path=Prezime, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox  Text="{Binding Path=Prezime}"/>
             <Label >Godiste:</Label>
-            <TextBox  Text="{Binding Path=Godiste, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox  Text="{Binding Path=Godiste}"/>
         </UniformGrid>
-        <Button FontSize="34">TEEEEST</Button>
+		<Button Name="dugmence" FontSize="34" Click="DodajOsobu">Dodaj</Button>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Label FontSize="34" Content="{Binding Path=Ime}" />
             <Label FontSize="34" Content="{Binding Path=Prezime}"/>
             <Label FontSize="34" Content="{Binding Path=Godiste}"/>
         </StackPanel>
-        <DataGrid Name="dg" ColumnWidth="*"/>
-    </StackPanel>
+		<DataGrid SelectionMode="Single" SelectionChanged="dg_SelectionChanged" Name="dg" ColumnWidth="*" IsReadOnly="True" AutoGenerateColumns="False">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Ime" Binding="{Binding Path=Ime}"/>
+				<DataGridTextColumn Header="Prezime" Binding="{Binding Path=Prezime}"/>
+			</DataGrid.Columns>
+		</DataGrid>
+	</StackPanel>
 </Window>
